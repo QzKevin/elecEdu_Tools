@@ -13,9 +13,6 @@ windows用户安装python环境后终端执行：
 pip install ttkbootstrap
 pip install requests
 pip install webbrowser
-pip install json
-pip install io
-pip install os
 ```
 > macOS用户请百度运行库安装方法，上面的是windows用户安装方法
 
