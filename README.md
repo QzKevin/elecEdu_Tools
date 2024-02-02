@@ -2,6 +2,7 @@
 
 ![Python Version](https://img.shields.io/badge/Python-3.x-blue.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
+![version](https://img.shields.io/badge/version-2.0-purple.svg)
 
 本工具用于快速解析下载**国家中小学智慧教育平台**中电子课本PDF文件
 
