@@ -1,10 +1,10 @@
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from tkinter import filedialog
-import requests
 import webbrowser
-import io
+import requests
 import json
+import io
 import os
 
 # 功能函数
@@ -14,7 +14,7 @@ headers = {
     }
 
 # 获取contentID
-def getContentID(url):   
+def getContentID(url):
     for non_empty in url[url.find('?') + 1:].split('&'):
         if non_empty.split('=')[0] == 'contentId':
             contentId = non_empty.split('=')[1]
@@ -23,11 +23,11 @@ def getContentID(url):
 
 # 解析链接
 def origin01(contentID):
-    url = f'https://r1-ndr.ykt.cbern.com.cn/edu_product/esp/assets_document/{contentID}.pkg/pdf.pdf'
+    url = f'https://r1-ndr.ykt.cbern.com.cn/edu_product/esp/assets/{contentID}.pkg/pdf.pdf'
     return url
 
 def origin02(contentID):
-    url = f'https://r2-ndr.ykt.cbern.com.cn/edu_product/esp/assets_document/{contentID}.pkg/pdf.pdf'
+    url = f'https://r2-ndr.ykt.cbern.com.cn/edu_product/esp/assets/{contentID}.pkg/pdf.pdf'
     return url
 
 # 文件夹选择函数
@@ -37,7 +37,7 @@ def select_file():
 
 # 获取文件名
 def getFilename(contentId):
-    response = requests.get(f"https://s-file-1.ykt.cbern.com.cn/zxx/ndrv2/resources/tch_material/details/{contentId}.json")
+    response = requests.get(f'https://s-file-1.ykt.cbern.com.cn/zxx/ndrv2/resources/tch_material/details/{contentId}.json')
     try:
         data = json.loads(response.text)
         return data["title"] # 返回教材标题
@@ -61,7 +61,6 @@ def ensure(event):
 def analyze():
     url = url_get.get()
     contentID = getContentID(url)
-    tab = origin01(contentID)
     cbo.bind("<<ComboboxSelected>>", ensure)
     if cbo.get() == "解析源1":
         tab = origin01(contentID)
@@ -73,15 +72,30 @@ def analyze():
 
 def analyze_button():
     tab = analyze()
+    text.delete(1.0,ttk.END)
     text.insert("insert",tab + "\n")
 
 # 下载函数
-def main():
+def download_button():
     url = url_get.get()
     contentID = getContentID(url)
     tab = analyze()
     download_pdf(getFilename(contentID), tab)
 
+# 右键菜单函数
+def show_menu(event):
+    menu.post(event.x_root,event.y_root)
+
+def handle_menu_action(action_type):
+    if action_type == "剪切":
+        url_get.event_generate("<<Cut>>")
+    if action_type == "粘贴":
+        url_get.event_generate("<<Paste>>")
+    if action_type == "复制":
+        url_get.event_generate("<<Copy>>")
+    if action_type == "全选":
+        url_get.event_generate("<<SelectAll>>")
+    
 # GUI
 #实例化创建应用程序窗口,大部分命令与tkinter相似
 root = ttk.Window(
@@ -96,8 +110,10 @@ root = ttk.Window(
         )
 # 禁止调节窗口大小
 root.resizable(False,False)
-root.iconbitmap('logo.ico')
+# 设置右上角logo
+# root.iconbitmap('logo.ico')
 
+# 标签组
 lb = ttk.Label(text="教材链接：",font=("宋体",15),bootstyle="primary")
 lb.place(x=20,y=15)
 lb2 = ttk.Label(text="解析源：",font=("宋体",15),bootstyle="primary")
@@ -105,7 +121,7 @@ lb2.place(x=20,y=205)
 lb3 = ttk.Label(text="是否在浏览器打开文件",font=("宋体",15),bootstyle="primary")
 lb3.place(x=270,y=205)
 
-# 输入框
+# 获取教材链接输入框
 url_get = ttk.Entry(root,show=None,bootstyle ="primary",width= 55)
 url_get.place(x=120,y=15)
 
@@ -119,7 +135,7 @@ path_select = ttk.Entry(root, width=50,textvariable = select_path)
 path_select.place(x=20,y=160)
 b3 = ttk.Button(root,width=13, text="选择文件路径", command=select_file).place(x=400,y=160)
 
-# 解析源选择
+# 解析源选择控件
 cbo = ttk.Combobox(
             master=root,
             bootstyle = PRIMARY,
@@ -130,14 +146,23 @@ cbo = ttk.Combobox(
         )
 cbo.place(x= 100,y=202)
 
-# 按钮
+# 解析下载浏览器打开按钮
 b1 = ttk.Button(root, text="解析", width = 30,bootstyle=(PRIMARY, "outline-toolbutton"),command=analyze_button)
 b1.place(x=20,y = 250)
-b2 = ttk.Button(root, text="下载", width = 30,bootstyle=(PRIMARY, "outline-toolbutton"),command=main)
+b2 = ttk.Button(root, text="下载", width = 30,bootstyle=(PRIMARY, "outline-toolbutton"),command=download_button)
 b2.place(x=280,y = 250)
 chkValue = ttk.BooleanVar()
 ck = ttk.Checkbutton(bootstyle="primary-round-toggle",variable = chkValue)
 ck.place(x=490,y=210)
+
+# 右键菜单
+menu = ttk.Menu(root,tearoff=False)
+menu.add_command(label='剪切',accelerator = 'Ctrl+X',command = lambda : handle_menu_action('剪切'))
+menu.add_command(label='复制',accelerator = 'Ctrl+V',command = lambda : handle_menu_action('复制'))
+menu.add_command(label='粘贴',accelerator = 'Ctrl+V',command = lambda : handle_menu_action('粘贴'))
+menu.add_command(label='全选',accelerator = 'Ctrl+A',command = lambda : handle_menu_action('全选'))
+# 绑定右键菜单
+url_get.bind("<Button-3>",show_menu)
 
 # 开始主循环
 root.mainloop()
