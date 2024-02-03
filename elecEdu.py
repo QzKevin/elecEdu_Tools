@@ -22,13 +22,13 @@ def getContentID(url):
     return contentId
 
 # 解析链接
-def origin01(contentID):
-    url = f'https://r1-ndr.ykt.cbern.com.cn/edu_product/esp/assets/{contentID}.pkg/pdf.pdf'
-    return url
-
-def origin02(contentID):
-    url = f'https://r2-ndr.ykt.cbern.com.cn/edu_product/esp/assets/{contentID}.pkg/pdf.pdf'
-    return url
+def origin(contentID):
+    if cbo.get() == "解析源1":
+        url = f'https://r1-ndr.ykt.cbern.com.cn/edu_product/esp/assets/{contentID}.pkg/pdf.pdf'
+        return url
+    else:
+        url = f'https://r2-ndr.ykt.cbern.com.cn/edu_product/esp/assets/{contentID}.pkg/pdf.pdf'
+        return url
 
 # 文件夹选择函数
 def select_file():
@@ -62,10 +62,7 @@ def analyze():
     url = url_get.get()
     contentID = getContentID(url)
     cbo.bind("<<ComboboxSelected>>", ensure)
-    if cbo.get() == "解析源1":
-        tab = origin01(contentID)
-    elif cbo.get() == "解析源2":
-        tab =origin02(contentID)
+    tab = origin(contentID)
     if chkValue.get() == True:
         webbrowser.open_new_tab(tab)
     return tab

@@ -18,7 +18,7 @@ pip install json
 pip install io
 pip install os
 ```
-> macOS用户请百度运行库安装方法，上面的是windows用户安装方法
+> macOS用户请Google运行库安装方法，上面的是windows用户安装方法
 
 
 ## 使用方法
