@@ -155,7 +155,7 @@ ck.place(x=490,y=210)
 # 右键菜单
 menu = ttk.Menu(root,tearoff=False)
 menu.add_command(label='剪切',accelerator = 'Ctrl+X',command = lambda : handle_menu_action('剪切'))
-menu.add_command(label='复制',accelerator = 'Ctrl+V',command = lambda : handle_menu_action('复制'))
+menu.add_command(label='复制',accelerator = 'Ctrl+C',command = lambda : handle_menu_action('复制'))
 menu.add_command(label='粘贴',accelerator = 'Ctrl+V',command = lambda : handle_menu_action('粘贴'))
 menu.add_command(label='全选',accelerator = 'Ctrl+A',command = lambda : handle_menu_action('全选'))
 # 绑定右键菜单
