@@ -8,18 +8,18 @@
 
 > 本工具使用python3.x开发，项目开源页面release处有已导出的exe可执行文件，可直接下载使用，非windows用户请下载源代码到本地，安装python运行环境并配置运行所需要的库即可使用
 
-## 项目需要的运行库
-windows用户安装python环境后终端执行：
-```
-pip install ttkbootstrap
-pip install requests
-pip install webbrowser
-pip install json
-pip install io
-pip install os
-```
-> macOS用户请Google运行库安装方法，上面的是windows用户安装方法
+## 安装程序
 
+### 本地Python安装依赖库
+```
+pip install -r requirements.txt
+```
+
+### 下载可执行程序包
+- 方法一：进入本项目的[Releases](https://github.com/QzKevin/elecEdu_Tools/releases)页面下载对应平台的可执行文件（更新可能不及时）
+- 方法二：进入本项目的[Actions](https://github.com/QzKevin/elecEdu_Tools/actions)页面选择对应平台的构建在Artifacts栏目下找到以elecEdu命名的文件下载即可
+
+> Windows平台为单文件可执行程序，下载即可使用，Mac和Linux平台为zip压缩包,通过各自平台安装第三方软件的方法安装即可使用
 
 ## 使用方法
 
