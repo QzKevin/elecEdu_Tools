@@ -1,12 +1,4 @@
-# 国家中小学智慧教育平台下载器
-
-![Python Version](https://img.shields.io/badge/Python-3.x-blue.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
-![version](https://img.shields.io/badge/Version-2.0-purple.svg)
-
-本工具用于快速解析下载**国家中小学智慧教育平台**中电子课本PDF文件
-
-> 本工具使用python3.x开发，项目开源页面release处有已导出的exe可执行文件，可直接下载使用，非windows用户请下载源代码到本地，安装python运行环境并配置运行所需要的库即可使用
+![elecEdu_Tools](https://socialify.git.ci/QzKevin/elecEdu_Tools/image?description=1&font=Jost&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Auto)
 
 ## 安装程序
 
@@ -19,7 +11,7 @@ pip install -r requirements.txt
 - 方法一：进入本项目的[Releases](https://github.com/QzKevin/elecEdu_Tools/releases)页面下载对应平台的可执行文件（更新可能不及时）
 - 方法二：进入本项目的[Actions](https://github.com/QzKevin/elecEdu_Tools/actions)页面选择对应平台的构建在Artifacts栏目下找到以elecEdu命名的文件下载即可
 
-> Windows平台为单文件可执行程序，下载即可使用，Mac和Linux平台为zip压缩包,通过各自平台安装第三方软件的方法安装即可使用
+> 本工具使用python3.x开发，项目开源页面release处有已导出的exe可执行文件，可直接下载使用，Mac和Linux平台为zip压缩包,通过各自平台的方法安装即可使用
 
 ## 使用方法
 
